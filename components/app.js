@@ -1,16 +1,19 @@
 class App {
-  constructor() {
+  constructor(gradeTable) {
     this.handleGetGradesError = this.handleGetGradesError.bind(this);
     this.handleGetGradesSuccess = this.handleGetGradesSuccess.bind(this);
+    this.gradeTable = gradeTable;
+
   }
 
   handleGetGradesError(error) {
     console.error("test error method", error);
-    // console.log("test error method");
   }
 
   handleGetGradesSuccess(grades) {
-    console.log("test log method of success grade", grades);
+    // console.log("test log method of success grade", grades);
+    // pass its grades parameter to the updateGrades() method of the gradeTable property of the this object
+    this.gradeTable.updateGrades(grades);
   }
 
   getGrades() {
@@ -29,6 +32,5 @@ class App {
     this.getGrades();
     // console.log("testing start method");
   }
-
 
 }
