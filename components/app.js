@@ -3,7 +3,6 @@ class App {
     this.handleGetGradesError = this.handleGetGradesError.bind(this);
     this.handleGetGradesSuccess = this.handleGetGradesSuccess.bind(this);
     this.gradeTable = gradeTable;
-
   }
 
   handleGetGradesError(error) {
@@ -11,7 +10,6 @@ class App {
   }
 
   handleGetGradesSuccess(grades) {
-    // console.log("test log method of success grade", grades);
     // pass its grades parameter to the updateGrades() method of the gradeTable property of the this object
     this.gradeTable.updateGrades(grades);
   }
@@ -30,7 +28,5 @@ class App {
 
   start() {
     this.getGrades();
-    // console.log("testing start method");
   }
-
 }
