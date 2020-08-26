@@ -1,9 +1,14 @@
 class App {
-  constructor(gradeTable, pageHeader) {
+  constructor(gradeTable, pageHeader, gradeForm) {
     this.handleGetGradesError = this.handleGetGradesError.bind(this);
     this.handleGetGradesSuccess = this.handleGetGradesSuccess.bind(this);
     this.gradeTable = gradeTable;
     this.pageHeader = pageHeader;
+    this.gradeForm = gradeForm;
+
+    this.createGrade = this.createGrade.bind(this);
+    this.handleCreateGradeError = this.handleCreateGradeError.bind(this);
+    this.handleCreateGradeSuccess = this.handleCreateGradeSuccess.bind(this);
   }
 
   handleGetGradesError(error) {
@@ -11,18 +16,19 @@ class App {
   }
 
   handleGetGradesSuccess(grades) {
+    this.gradeTable.updateGrades(grades);
+
     var avgGradeTotal = 0;
     var result;
 
     for(var i = 0; i < grades.length; i++) {
       avgGradeTotal+=grades[i].grade;
-      result = avgGradeTotal/grades.length
+      result = avgGradeTotal / grades.length;
     }
-
     // pass its grades parameter to the updateGrades() method of the gradeTable property of the this object
     // or: Pass the received grades parameter to the updateGrades method of the gradeTable property of the this object.
-    this.gradeTable.updateGrades(grades);
-    this.pageHeader.updateAverage(result);
+
+    this.pageHeader.updateAverage(result.toFixed(3));
   }
 
   getGrades() {
@@ -37,7 +43,38 @@ class App {
     });
   }
 
-  start() {
+  createGrade(name, course, grade) {
+    console.log("name", name);
+    console.log("course", course);
+    console.log("grade", grade);
+
+    $.ajax({
+      method: "POST",
+      url: "https://sgt.lfzprototypes.com/api/grades",
+      data: {
+        "name": name,
+        "course": course,
+        "grade": grade
+      },
+      headers:{
+        "X-Access-Token": "BnyD4O8R"
+      },
+      success: this.handleCreateGradeSuccess,
+      error: this.handleCreateGradeError
+    });
+  }
+
+  handleCreateGradeError(error) {
+    console.error("error: ", error);
+  }
+
+  handleCreateGradeSuccess() {
     this.getGrades();
   }
+
+  start() {
+    this.getGrades();
+    this.gradeForm.onSubmit(this.createGrade);
+  }
+
 }
