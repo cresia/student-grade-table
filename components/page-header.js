@@ -12,7 +12,7 @@ class PageHeader {
     avgGrades.textContent = "";
 
     var createDivAvg = document.createElement("div");
-    createDivAvg.textContent = newAverage;
+    createDivAvg.textContent = newAverage.toFixed(3);
 
     avgGrades.append(createDivAvg);
 

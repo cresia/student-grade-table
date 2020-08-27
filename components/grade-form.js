@@ -12,9 +12,8 @@ class GradeForm {
   handleSubmit(event) {
     //handleSubmit takes one parameter, event and calls the preventDefault() method on the event
     //and logs a test message (like "hi") to the console.
-    event.preventDefault()
-    console.log("hi");
-    
+    event.preventDefault();
+
     var instanceFormGrade = new FormData(event.target);
     // var result = instanceFormGrade.getAll('name', 'course', 'grade');
     var name = instanceFormGrade.get('name');

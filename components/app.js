@@ -16,8 +16,6 @@ class App {
   }
 
   handleGetGradesSuccess(grades) {
-    this.gradeTable.updateGrades(grades);
-
     var avgGradeTotal = 0;
     var result;
 
@@ -27,8 +25,8 @@ class App {
     }
     // pass its grades parameter to the updateGrades() method of the gradeTable property of the this object
     // or: Pass the received grades parameter to the updateGrades method of the gradeTable property of the this object.
-
-    this.pageHeader.updateAverage(result.toFixed(3));
+    this.gradeTable.updateGrades(grades);
+    this.pageHeader.updateAverage(result);
   }
 
   getGrades() {
@@ -44,10 +42,6 @@ class App {
   }
 
   createGrade(name, course, grade) {
-    console.log("name", name);
-    console.log("course", course);
-    console.log("grade", grade);
-
     $.ajax({
       method: "POST",
       url: "https://sgt.lfzprototypes.com/api/grades",
