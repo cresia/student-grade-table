@@ -15,11 +15,15 @@ class GradeForm {
     event.preventDefault();
 
     var instanceFormGrade = new FormData(event.target);
-    // var result = instanceFormGrade.getAll('name', 'course', 'grade');
+    // --- or --- using getAll(): if only one value, need to specify the postion since it return as an array
+    // var name = instanceFormGrade.getAll('name')[0];
+    // var course = instanceFormGrade.getAll('course')[0];
+    // var grade = instanceFormGrade.getAll('grade')[0];
+
+    // ----- or ---- using .get() : for a single value result
     var name = instanceFormGrade.get('name');
     var course = instanceFormGrade.get('course');
     var grade = instanceFormGrade.get('grade');
-    // this.createGrade(result);
     this.createGrade(name, course, grade);
     event.target.reset();
   }
