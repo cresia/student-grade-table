@@ -1,3 +1,5 @@
+var pElement = document.querySelector(".d-none");
+
 var formElement  = document.querySelector("form");
 var instanceGradeForm = new GradeForm (formElement);
 
@@ -10,7 +12,7 @@ var instancePageHeader = new PageHeader(headerElement);
 
 
 var tableElement = document.querySelector('table');
-var instanceGradeTable = new GradeTable(tableElement);
+var instanceGradeTable = new GradeTable(tableElement, pElement);
 
 
 // instantiate your App class
